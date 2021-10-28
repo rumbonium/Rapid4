@@ -30,13 +30,6 @@ public class PlantFactorBehavior : MonoBehaviour
         DecreaseTimer = 0f;
     }
 
-
-/*
-Update
-    * Increment timers for increase and decrease values
-    * If timer expires update value and reset timer
-    * Update slider color
-*/
     void Update()
     {
         IncreaseTimer += Time.deltaTime;
@@ -63,11 +56,11 @@ Update
         }
     }
 
-    void IncreaseAction(){
+    public void IncreaseAction(){
         slider.value += ManualIncreaseValue;
     }
 
-    void DecreaseAction(){
+    public void DecreaseAction(){
         slider.value -= ManualDecreaseValue;
     }
 }
