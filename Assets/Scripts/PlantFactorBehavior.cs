@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PlantFactorBehavior : MonoBehaviour
 {
+    public enum PlantFactorState {LOW, MID, HIGH};
+    public PlantFactorState state {get; set; }
     public Slider slider;
     public Image fill;
     public float StartValue;
@@ -26,6 +28,10 @@ public class PlantFactorBehavior : MonoBehaviour
     void Start()
     {
         slider.value = StartValue;
+        state = (StartValue > HighCrossValue) ? PlantFactorState.HIGH 
+                : (StartValue < LowCrossValue) ? PlantFactorState.LOW 
+                : PlantFactorState.MID;
+
         IncreaseTimer = 0f;
         DecreaseTimer = 0f;
     }
@@ -47,12 +53,15 @@ public class PlantFactorBehavior : MonoBehaviour
 
         if(slider.value > HighCrossValue){
             fill.color = HighColor;
+            state = PlantFactorState.HIGH;
         }
         else if(slider.value < LowCrossValue){
             fill.color = LowColor;
+            state = PlantFactorState.LOW;
         }
         else{
             fill.color = MidColor;
+            state = PlantFactorState.MID;
         }
     }
 
@@ -63,4 +72,6 @@ public class PlantFactorBehavior : MonoBehaviour
     public void DecreaseAction(){
         slider.value -= ManualDecreaseValue;
     }
+
+
 }
