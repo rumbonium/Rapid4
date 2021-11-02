@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PlantFactorBehavior : MonoBehaviour
 {
+    public enum PlantFactorState {LOW, MID, HIGH};
+    public PlantFactorState state {get; set; }
     public Slider slider;
     public Image fill;
     public float StartValue;
@@ -13,6 +15,7 @@ public class PlantFactorBehavior : MonoBehaviour
     public Color HighColor;
     public float LowCrossValue;
     public float HighCrossValue;
+    private float MidValue;
     public float AutoDecreaseTime;
     public float AutoDecreaseValue;
     public float AutoIncreaseTime;
@@ -26,19 +29,18 @@ public class PlantFactorBehavior : MonoBehaviour
     void Start()
     {
         slider.value = StartValue;
+        state = (StartValue > HighCrossValue) ? PlantFactorState.HIGH 
+                : (StartValue < LowCrossValue) ? PlantFactorState.LOW 
+                : PlantFactorState.MID;
+
         IncreaseTimer = 0f;
         DecreaseTimer = 0f;
+        MidValue = (HighCrossValue + LowCrossValue) / 2f;
     }
 
-
-/*
-Update
-    * Increment timers for increase and decrease values
-    * If timer expires update value and reset timer
-    * Update slider color
-*/
     void Update()
     {
+        MidValue = (HighCrossValue + LowCrossValue) / 2f;
         IncreaseTimer += Time.deltaTime;
         DecreaseTimer += Time.deltaTime;
 
@@ -54,20 +56,33 @@ Update
 
         if(slider.value > HighCrossValue){
             fill.color = HighColor;
+            state = PlantFactorState.HIGH;
         }
         else if(slider.value < LowCrossValue){
             fill.color = LowColor;
+            state = PlantFactorState.LOW;
+        }
+        else if(slider.value > LowCrossValue && slider.value < MidValue){
+            fill.color = Color.Lerp(LowColor, MidColor, (slider.value - LowCrossValue) / (MidValue - LowCrossValue));
+            state = PlantFactorState.MID;
+        }
+        else if(slider.value < HighCrossValue && slider.value > MidValue){
+            fill.color = Color.Lerp(MidColor, HighColor, (slider.value - MidValue) / (HighCrossValue - MidValue));
+            state = PlantFactorState.MID;
         }
         else{
             fill.color = MidColor;
+            state = PlantFactorState.MID;
         }
     }
 
-    void IncreaseAction(){
+    public void IncreaseAction(){
         slider.value += ManualIncreaseValue;
     }
 
-    void DecreaseAction(){
+    public void DecreaseAction(){
         slider.value -= ManualDecreaseValue;
     }
+
+
 }
