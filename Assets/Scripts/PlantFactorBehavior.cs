@@ -15,6 +15,7 @@ public class PlantFactorBehavior : MonoBehaviour
     public Color HighColor;
     public float LowCrossValue;
     public float HighCrossValue;
+    private float MidValue;
     public float AutoDecreaseTime;
     public float AutoDecreaseValue;
     public float AutoIncreaseTime;
@@ -34,10 +35,12 @@ public class PlantFactorBehavior : MonoBehaviour
 
         IncreaseTimer = 0f;
         DecreaseTimer = 0f;
+        MidValue = (HighCrossValue + LowCrossValue) / 2f;
     }
 
     void Update()
     {
+        MidValue = (HighCrossValue + LowCrossValue) / 2f;
         IncreaseTimer += Time.deltaTime;
         DecreaseTimer += Time.deltaTime;
 
@@ -58,6 +61,14 @@ public class PlantFactorBehavior : MonoBehaviour
         else if(slider.value < LowCrossValue){
             fill.color = LowColor;
             state = PlantFactorState.LOW;
+        }
+        else if(slider.value > LowCrossValue && slider.value < MidValue){
+            fill.color = Color.Lerp(LowColor, MidColor, (slider.value - LowCrossValue) / (MidValue - LowCrossValue));
+            state = PlantFactorState.MID;
+        }
+        else if(slider.value < HighCrossValue && slider.value > MidValue){
+            fill.color = Color.Lerp(MidColor, HighColor, (slider.value - MidValue) / (HighCrossValue - MidValue));
+            state = PlantFactorState.MID;
         }
         else{
             fill.color = MidColor;
