@@ -28,12 +28,13 @@ public class DragAndDrop : MonoBehaviour
                 case TouchPhase.Began:
                     Collider2D touchedCollider = Physics2D.OverlapPoint(touchPosition);
                     if (collider == touchedCollider)
-                        moveAllowed = true; water.Play();
+                        moveAllowed = true; 
                     break;
                 
                 case TouchPhase.Moved:
                     if (moveAllowed)
                         transform.position = new Vector2(touchPosition.x, touchPosition.y);
+                        water.Play();
                     break;
                 
                 case TouchPhase.Ended:
