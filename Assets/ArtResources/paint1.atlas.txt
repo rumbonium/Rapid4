@@ -1,0 +1,53 @@
+
+paint1.png
+size: 1538,1542
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Bowl
+  rotate: false
+  xy: 500, 1002
+  size: 652, 538
+  orig: 653, 538
+  offset: 0, 0
+  index: -1
+Flower
+  rotate: true
+  xy: 2, 2
+  size: 998, 1534
+  orig: 1547, 1534
+  offset: 549, 0
+  index: -1
+FrontLeaf
+  rotate: true
+  xy: 2, 1077
+  size: 463, 496
+  orig: 574, 669
+  offset: 0, 0
+  index: -1
+
+paint12.png
+size: 1742,1495
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+BackLeaves
+  rotate: false
+  xy: 2, 2
+  size: 1738, 1491
+  orig: 1738, 1519
+  offset: 0, 0
+  index: -1
+
+paint13.png
+size: 1735,1550
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+FrontLeave
+  rotate: false
+  xy: 2, 2
+  size: 1731, 1546
+  orig: 1731, 1546
+  offset: 0, 0
+  index: -1
