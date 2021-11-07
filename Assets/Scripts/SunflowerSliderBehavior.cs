@@ -8,7 +8,7 @@ using UnityEngine.Experimental.Rendering.Universal;
 public class SunflowerSliderBehavior : MonoBehaviour
 {
     public Slider slider;
-    public GameObject sunflower;
+    public GameObject plant;
     Animator animator;
     public Light2D light2D;
     public GameObject plantFactor;
@@ -21,7 +21,7 @@ public class SunflowerSliderBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = sunflower.GetComponent<Animator>();
+        animator = plant.GetComponent<Animator>();
         factorSlider = (Slider)plantFactor.transform.GetChild(0).gameObject.GetComponent<Slider>();
         factorBehavior = plantFactor.GetComponent<PlantFactorBehavior>();
     }

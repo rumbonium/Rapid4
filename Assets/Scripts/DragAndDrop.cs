@@ -8,6 +8,8 @@ public class DragAndDrop : MonoBehaviour
     Collider2D collider;
     public ParticleSystem water;
 
+    private Transform t;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,7 @@ public class DragAndDrop : MonoBehaviour
                 case TouchPhase.Began:
                     Collider2D touchedCollider = Physics2D.OverlapPoint(touchPosition);
                     if (collider == touchedCollider)
+                        //transform.Rotate(0,0,33f);
                         moveAllowed = true; 
                     break;
                 
@@ -39,6 +42,7 @@ public class DragAndDrop : MonoBehaviour
                 
                 case TouchPhase.Ended:
                     moveAllowed = false; water.Stop();
+                    //transform.Rotate(0,0,-33f);
                     break;
 			}
 		}
